@@ -34,12 +34,11 @@ dependencies {
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.junit.platform.launcher)
 
-    // Spring
-    implementation(libs.spring.boot)
-    implementation(libs.spring.boot.web)
+    // SpringDoc (implementation-specific, not in server-api)
+    implementation(libs.springdoc.openapi.scalar)
 
     // Projects
-    implementation("dev.sbs:api:0.1.0")
+    implementation("dev.sbs:server-api:0.1.0")
     implementation("dev.sbs:minecraft-api:0.1.0")
 }
 
