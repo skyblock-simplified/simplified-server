@@ -13,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
  * permissions of lower roles. The default hierarchy is:
  * {@code DEVELOPER > SUPER_ADMIN > ADMIN > SUPER_MODERATOR > MODERATOR > HELPER > USER > LIMITED_ACCESS}.</p>
  */
-public class RoleHierarchyService {
+public class ApiKeyRoleHierarchy {
 
     private final @NotNull ConcurrentMap<String, ConcurrentSet<String>> hierarchy = Concurrent.newMap();
 
-    public RoleHierarchyService() {
+    public ApiKeyRoleHierarchy() {
         this.setupHierarchy(Concurrent.newList(
             "DEVELOPER", "SUPER_ADMIN", "ADMIN", "SUPER_MODERATOR", "MODERATOR", "HELPER", "USER", "LIMITED_ACCESS"
         ));

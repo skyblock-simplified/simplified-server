@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  * declaring class. The version prefix is combined with the existing request mapping
  * paths to produce versioned URLs (e.g., {@code /v1/hello}).</p>
  */
-public class ApiVersionRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
+public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
     @Override
     protected @Nullable RequestMappingInfo getMappingForMethod(@NotNull Method method, @NotNull Class<?> handlerType) {
