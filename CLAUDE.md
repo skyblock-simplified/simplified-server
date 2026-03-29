@@ -18,23 +18,24 @@ See [`server-api/CLAUDE.md`](../server-api/CLAUDE.md) for the reusable Spring se
 
 ## Module Overview
 
-`simplified-server` is the SkyBlock-specific Spring Boot REST server. It depends on `server-api` (framework), `api`, and `minecraft-api` via Maven coordinates. The `server-api` framework provides API versioning, API key authentication, error handling, and server configuration; this module provides the concrete controllers, OpenAPI metadata, and application entry point.
+`simplified-server` is the SkyBlock-specific Spring Boot REST server. It depends on `server-api` (framework) and `minecraft-api` via Maven coordinates. The `server-api` framework provides API versioning, API key authentication, error handling, and server configuration; this module provides the concrete controllers, OpenAPI metadata, and application entry point.
 
 Follows the same split pattern as `discord-api` (framework) vs `simplified-bot` (implementation).
 
 ### Entry Point
 
-- **`SimplifiedServer`** - Spring Boot application. Gson is the primary HTTP serializer via `MinecraftApi.getGson()`, registered first in `configureMessageConverters()`. Jackson auto-configuration remains enabled for SpringDoc's internal OpenAPI spec generation. Configures `StringHttpMessageConverter` (for HTML error pages) and `GsonHttpMessageConverter` as message converters. Registers `SecurityHeaderInterceptor` for security response headers. Implements `WebMvcConfigurer` directly (no `@EnableWebMvc`, no `WebMvcConfigurationSupport`). Uses `ServerConfig.optimized()` to supply all default properties programmatically. Scans both `dev.sbs.simplifiedserver` and `dev.sbs.serverapi` packages via `@SpringBootApplication(scanBasePackages = ...)`.
+- **`SimplifiedServer`** - Spring Boot application. Provides a `Gson` bean via `MinecraftApi.getGson()` that `ServerWebConfig` (from `server-api`) picks up automatically for the `GsonHttpMessageConverter`. Jackson auto-configuration remains enabled for SpringDoc's internal OpenAPI spec generation. Uses `ServerConfig.optimized()` to supply all default properties programmatically. Scans both `dev.sbs.simplifiedserver` and `dev.sbs.serverapi` packages via `@SpringBootApplication(scanBasePackages = ...)`.
 
 ### Package Structure
 
 **`config/`** - Application-specific configuration:
 - `OpenApiConfig` - `@Configuration` defining the `OpenAPI` metadata bean (title, description, version) used by SpringDoc for spec generation at `/v3/api-docs` and rendered by the Scalar UI at the root path.
 
-**`controller/`** - Spring MVC REST controllers:
-- `MojangController` - Mojang API proxy endpoints under `/mojang/`. Single `getUser(String identifier)` endpoint handles both username and UUID by attempting `UUID.fromString()` first. Uses `MinecraftApi.getMojangProxy()` for upstream calls. Annotated with `@Tag` and `@Operation` for OpenAPI documentation.
-- `TestApiKeyController` - Example endpoints under `/api/` demonstrating `@ApiKeyProtected` with `ApiKeyRole` role requirements.
-- `TestVersionController` - Example versioned endpoints (`/v1/hello`, `/v2/hello`, `/default`) demonstrating URL path versioning.
+**`controller/`** - Spring MVC REST controllers proxying upstream APIs:
+- `MojangController` - Mojang API proxy endpoints under `/mojang/`. Provides player profile lookup (by username or UUID), username resolution, UUID resolution, skin/cape properties, and bulk username lookup. Delegates to `MojangProxy` for upstream calls with automatic IPv6 rotation.
+- `HypixelController` - Hypixel API proxy endpoints under `/hypixel/`. Provides player data, guild lookups (by ID, name, or player), online status, player counts, punishment statistics, and game information. Delegates to `HypixelEndpoint`.
+- `SkyBlockController` - SkyBlock API proxy endpoints under `/skyblock/`. Provides profiles, auctions (by ID, profile, or player), active/ended auction listings, bazaar products, museum, garden, news, and fire sales. Delegates to `HypixelEndpoint`.
+- `ResourceController` - SkyBlock resource proxy endpoints under `/resources/`. Provides skill definitions, collection definitions, item definitions, and election data. None require an API key. Delegates to `HypixelEndpoint`.
 
 ### Dependencies
 
@@ -55,6 +56,5 @@ All properties are managed programmatically through `ServerConfig` (from `server
 - **Dependency:** `springdoc-openapi-starter-webmvc-scalar` (version in `gradle/libs.versions.toml`)
 - **Root path:** `GET /` redirects to the Scalar UI (`springdoc.use-root-path=true`)
 - **OpenAPI spec:** `GET /v3/api-docs` returns the auto-generated OpenAPI 3.0 JSON
-- **Jackson coexistence:** Jackson auto-configuration is enabled (not excluded) so SpringDoc can use it internally. Gson remains the primary HTTP serializer because `GsonHttpMessageConverter` is registered first in `configureMessageConverters()`
+- **Jackson coexistence:** Jackson auto-configuration is enabled (not excluded) so SpringDoc can use it internally. Gson remains the primary HTTP serializer because `GsonHttpMessageConverter` is registered first by `ServerWebConfig`
 - **Controller annotations:** `@Tag` (class-level) and `@Operation` (method-level) from `io.swagger.v3.oas.annotations` enrich the generated documentation
-- **Versioned endpoints:** Discovered automatically via the custom `ApiVersionHandlerMapping` which extends `RequestMappingHandlerMapping`
