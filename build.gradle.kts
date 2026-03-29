@@ -50,9 +50,12 @@ tasks {
     shadowJar {
         archiveClassifier.set("")
         mergeServiceFiles()
+        append("META-INF/spring.factories")
+        append("META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports")
 
         manifest {
             attributes["Main-Class"] = "dev.sbs.simplifiedserver.SimplifiedServer"
+            attributes["Multi-Release"] = "true"
         }
 
         exclude("META-INF/INDEX.LIST", "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
