@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  * available version numbers.
  *
  * <p>Built at startup from the registered handler mappings in
- * {@link ApiVersionRequestMappingHandlerMapping}. Used by
+ * {@link ApiVersionHandlerMapping}. Used by
  * {@link ApiVersionInterceptor} and the error controller to detect invalid
  * or missing version prefixes.</p>
  */
@@ -27,7 +27,7 @@ public class VersionRegistryService {
 
     private static final @NotNull Pattern VERSION_PREFIX = Pattern.compile("^/v(\\d+)(/.*)$");
 
-    private final @NotNull ApiVersionRequestMappingHandlerMapping handlerMapping;
+    private final @NotNull ApiVersionHandlerMapping handlerMapping;
     private @NotNull ConcurrentMap<String, ConcurrentSet<Integer>> versionedPaths = Concurrent.newMap();
 
     @PostConstruct

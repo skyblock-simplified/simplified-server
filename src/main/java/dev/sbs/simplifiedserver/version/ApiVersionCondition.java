@@ -12,7 +12,7 @@ import java.util.Arrays;
  * purposes in URL-path-based API versioning.
  *
  * <p>Since the path prefix (e.g., {@code /v1}) is already prepended by
- * {@link ApiVersionRequestMappingHandlerMapping}, the matching condition always
+ * {@link ApiVersionHandlerMapping}, the matching condition always
  * returns {@code this} - routing is handled entirely by the path.</p>
  */
 public class ApiVersionCondition implements RequestCondition<ApiVersionCondition> {

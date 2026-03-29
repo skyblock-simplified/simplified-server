@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Registers the {@link ApiVersionRequestMappingHandlerMapping} as a high-priority
+ * Registers the {@link ApiVersionHandlerMapping} as a high-priority
  * bean, the {@link VersionRegistryService} for precomputed version index lookups,
  * and the {@link ApiVersionInterceptor} for version validation on resolved handlers.
  */
@@ -15,14 +15,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ApiVersionConfig implements WebMvcConfigurer {
 
     @Bean
-    public @NotNull ApiVersionRequestMappingHandlerMapping apiVersionRequestMappingHandlerMapping() {
-        ApiVersionRequestMappingHandlerMapping mapping = new ApiVersionRequestMappingHandlerMapping();
+    public @NotNull ApiVersionHandlerMapping apiVersionRequestMappingHandlerMapping() {
+        ApiVersionHandlerMapping mapping = new ApiVersionHandlerMapping();
         mapping.setOrder(0);
         return mapping;
     }
 
     @Bean
-    public @NotNull VersionRegistryService versionRegistryService(@NotNull ApiVersionRequestMappingHandlerMapping handlerMapping) {
+    public @NotNull VersionRegistryService versionRegistryService(@NotNull ApiVersionHandlerMapping handlerMapping) {
         return new VersionRegistryService(handlerMapping);
     }
 
