@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-See the root [`CLAUDE.md`](../CLAUDE.md) for multi-module build commands, environment variables, cross-cutting patterns, and dependency details.
+See the root [`CLAUDE.md`](../CLAUDE.md) for cross-cutting patterns.
 See [`server-api/CLAUDE.md`](../server-api/CLAUDE.md) for the reusable Spring server framework (API versioning, API key auth, error handling, server config).
 
 ## Build & Test
