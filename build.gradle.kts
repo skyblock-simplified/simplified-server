@@ -70,4 +70,13 @@ tasks {
     build {
         dependsOn(shadowJar)
     }
+
+    register<Exec>("deploy") {
+        description = "Build and deploy to remote Docker host via SSH over VPN"
+        group = "deployment"
+        dependsOn(shadowJar)
+
+        environment("DOCKER_HOST", providers.environmentVariable("DOCKER_HOST").get())
+        commandLine("docker", "compose", "up", "-d", "--build", "--remove-orphans")
+    }
 }
