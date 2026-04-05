@@ -1,0 +1,21 @@
+services:
+
+  simplified-server:
+    container_name: simplified-server
+    build: .
+    user: "1000:1000"
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - logs:/app/logs
+    env_file:
+      - .env
+    environment:
+      JAVA_TOOL_OPTIONS: >-
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+        -Djava.net.preferIPv6Addresses=true
+
+volumes:
+  logs:
