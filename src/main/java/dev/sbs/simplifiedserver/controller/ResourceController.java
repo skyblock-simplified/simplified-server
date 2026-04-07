@@ -1,8 +1,7 @@
 package dev.sbs.simplifiedserver.controller;
 
 import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.HypixelClient;
-import dev.sbs.minecraftapi.client.hypixel.request.HypixelEndpoint;
+import dev.sbs.minecraftapi.client.hypixel.request.HypixelContract;
 import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceCollections;
 import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceElection;
 import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceItems;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * <p>Provides publicly accessible SkyBlock resource definitions including skills,
  * collections, items, and election data. None of these endpoints require an API key.
- * Delegates to the {@link HypixelEndpoint} Feign client for upstream calls.</p>
+ * Delegates to the {@link HypixelContract} Feign client for upstream calls.</p>
  */
 @Tag(name = "Resources", description = "SkyBlock resource endpoints (no API key required)")
 @RestController
@@ -30,8 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/resources")
 public class ResourceController {
 
-    private @NotNull HypixelEndpoint endpoint() {
-        return MinecraftApi.getClient(HypixelClient.class).getEndpoint();
+    private @NotNull HypixelContract contract() {
+        return MinecraftApi.getClient(HypixelContract.class).getContract();
     }
 
     /**
@@ -44,7 +43,7 @@ public class ResourceController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/skills")
     public @NotNull ResourceSkills getSkills() {
-        return endpoint().getSkills();
+        return contract().getSkills();
     }
 
     /**
@@ -57,7 +56,7 @@ public class ResourceController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/collections")
     public @NotNull ResourceCollections getCollections() {
-        return endpoint().getCollections();
+        return contract().getCollections();
     }
 
     /**
@@ -69,7 +68,7 @@ public class ResourceController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/items")
     public @NotNull ResourceItems getItems() {
-        return endpoint().getItems();
+        return contract().getItems();
     }
 
     /**
@@ -82,7 +81,7 @@ public class ResourceController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/election")
     public @NotNull ResourceElection getElection() {
-        return endpoint().getElection();
+        return contract().getElection();
     }
 
 }

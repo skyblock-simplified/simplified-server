@@ -1,8 +1,7 @@
 package dev.sbs.simplifiedserver.controller;
 
 import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.HypixelClient;
-import dev.sbs.minecraftapi.client.hypixel.request.HypixelEndpoint;
+import dev.sbs.minecraftapi.client.hypixel.request.HypixelContract;
 import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockAuctionResponse;
 import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockAuctions;
 import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockAuctionsEnded;
@@ -30,7 +29,7 @@ import java.util.UUID;
  * SkyBlock API proxy endpoints under {@code /skyblock/}.
  *
  * <p>Provides SkyBlock-specific data including profiles, auctions, bazaar,
- * museum, garden, news, and fire sales. Delegates to the {@link HypixelEndpoint}
+ * museum, garden, news, and fire sales. Delegates to the {@link HypixelContract}
  * Feign client for upstream calls.</p>
  */
 @Tag(name = "SkyBlock", description = "SkyBlock API proxy endpoints")
@@ -39,8 +38,8 @@ import java.util.UUID;
 @RequestMapping("/skyblock")
 public class SkyBlockController {
 
-    private @NotNull HypixelEndpoint endpoint() {
-        return MinecraftApi.getClient(HypixelClient.class).getEndpoint();
+    private @NotNull HypixelContract contract() {
+        return MinecraftApi.getClient(HypixelContract.class).getContract();
     }
 
     /**
@@ -56,7 +55,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/profiles/{playerId}")
     public @NotNull SkyBlockProfiles getProfiles(@Parameter(description = "Player UUID") @NotNull @PathVariable UUID playerId) {
-        return endpoint().getProfiles(playerId);
+        return contract().getProfiles(playerId);
     }
 
     /**
@@ -71,7 +70,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/museum/{islandId}")
     public @NotNull SkyBlockMuseumResponse getMuseum(@Parameter(description = "SkyBlock profile ID") @NotNull @PathVariable UUID islandId) {
-        return endpoint().getMuseum(islandId);
+        return contract().getMuseum(islandId);
     }
 
     /**
@@ -84,7 +83,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/garden/{islandId}")
     public @NotNull SkyBlockGardenResponse getGarden(@Parameter(description = "SkyBlock profile ID") @NotNull @PathVariable UUID islandId) {
-        return endpoint().getGarden(islandId);
+        return contract().getGarden(islandId);
     }
 
     /**
@@ -96,7 +95,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/news")
     public @NotNull SkyBlockNews getNews() {
-        return endpoint().getNews();
+        return contract().getNews();
     }
 
     /**
@@ -109,7 +108,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/bazaar")
     public @NotNull SkyBlockBazaar getBazaar() {
-        return endpoint().getBazaar();
+        return contract().getBazaar();
     }
 
     /**
@@ -122,7 +121,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/auction/id/{auctionId}")
     public @NotNull SkyBlockAuctionResponse getAuctionById(@Parameter(description = "Auction UUID") @NotNull @PathVariable UUID auctionId) {
-        return endpoint().getAuctionById(auctionId);
+        return contract().getAuctionById(auctionId);
     }
 
     /**
@@ -135,7 +134,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/auction/profile/{islandId}")
     public @NotNull SkyBlockAuctionResponse getAuctionByIsland(@Parameter(description = "SkyBlock profile ID") @NotNull @PathVariable UUID islandId) {
-        return endpoint().getAuctionByIsland(islandId);
+        return contract().getAuctionByIsland(islandId);
     }
 
     /**
@@ -148,7 +147,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/auction/player/{playerId}")
     public @NotNull SkyBlockAuctionResponse getAuctionByPlayer(@Parameter(description = "Player UUID") @NotNull @PathVariable UUID playerId) {
-        return endpoint().getAuctionByPlayer(playerId);
+        return contract().getAuctionByPlayer(playerId);
     }
 
     /**
@@ -161,7 +160,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/auctions")
     public @NotNull SkyBlockAuctions getAuctions() {
-        return endpoint().getAuctions();
+        return contract().getAuctions();
     }
 
     /**
@@ -175,7 +174,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/auctions/{page}")
     public @NotNull SkyBlockAuctions getAuctions(@Parameter(description = "Zero-based page number") @NotNull @PathVariable Integer page) {
-        return endpoint().getAuctions(page);
+        return contract().getAuctions(page);
     }
 
     /**
@@ -188,7 +187,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/auctions/ended")
     public @NotNull SkyBlockAuctionsEnded getEndedAuctions() {
-        return endpoint().getEndedAuctions();
+        return contract().getEndedAuctions();
     }
 
     /**
@@ -201,7 +200,7 @@ public class SkyBlockController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/firesales")
     public @NotNull SkyBlockFireSaleResponse getFireSales() {
-        return endpoint().getFireSales();
+        return contract().getFireSales();
     }
 
 }

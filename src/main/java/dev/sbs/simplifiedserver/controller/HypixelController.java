@@ -1,8 +1,7 @@
 package dev.sbs.simplifiedserver.controller;
 
 import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.HypixelClient;
-import dev.sbs.minecraftapi.client.hypixel.request.HypixelEndpoint;
+import dev.sbs.minecraftapi.client.hypixel.request.HypixelContract;
 import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelCounts;
 import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelGuildResponse;
 import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelPlayerResponse;
@@ -27,7 +26,7 @@ import java.util.UUID;
  * Hypixel API proxy endpoints under {@code /hypixel/}.
  *
  * <p>Provides player data, guild lookups, online status, punishment statistics,
- * player counts, and game information. Delegates to the {@link HypixelEndpoint}
+ * player counts, and game information. Delegates to the {@link HypixelContract}
  * Feign client for upstream calls.</p>
  */
 @Tag(name = "Hypixel", description = "Hypixel API proxy endpoints")
@@ -36,8 +35,8 @@ import java.util.UUID;
 @RequestMapping("/hypixel")
 public class HypixelController {
 
-    private @NotNull HypixelEndpoint endpoint() {
-        return MinecraftApi.getClient(HypixelClient.class).getEndpoint();
+    private @NotNull HypixelContract contract() {
+        return MinecraftApi.getClient(HypixelContract.class).getContract();
     }
 
     /**
@@ -49,7 +48,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/counts")
     public @NotNull HypixelCounts getCounts() {
-        return endpoint().getCounts();
+        return contract().getCounts();
     }
 
     /**
@@ -62,7 +61,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/guild/id/{guildId}")
     public @NotNull HypixelGuildResponse getGuildById(@Parameter(description = "Guild ID") @NotNull @PathVariable String guildId) {
-        return endpoint().getGuildById(guildId);
+        return contract().getGuildById(guildId);
     }
 
     /**
@@ -75,7 +74,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/guild/name/{guildName}")
     public @NotNull HypixelGuildResponse getGuildByName(@Parameter(description = "Guild name") @NotNull @PathVariable String guildName) {
-        return endpoint().getGuildByName(guildName);
+        return contract().getGuildByName(guildName);
     }
 
     /**
@@ -88,7 +87,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/guild/player/{playerId}")
     public @NotNull HypixelGuildResponse getGuildByPlayer(@Parameter(description = "Player UUID") @NotNull @PathVariable UUID playerId) {
-        return endpoint().getGuildByPlayer(playerId);
+        return contract().getGuildByPlayer(playerId);
     }
 
     /**
@@ -101,7 +100,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/player/{playerId}")
     public @NotNull HypixelPlayerResponse getPlayer(@Parameter(description = "Player UUID") @NotNull @PathVariable UUID playerId) {
-        return endpoint().getPlayer(playerId);
+        return contract().getPlayer(playerId);
     }
 
     /**
@@ -113,7 +112,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/punishmentstats")
     public @NotNull HypixelPunishmentStats getPunishmentStats() {
-        return endpoint().getPunishmentStats();
+        return contract().getPunishmentStats();
     }
 
     /**
@@ -126,7 +125,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/status/{playerId}")
     public @NotNull HypixelStatus getStatus(@Parameter(description = "Player UUID") @NotNull @PathVariable UUID playerId) {
-        return endpoint().getStatus(playerId);
+        return contract().getStatus(playerId);
     }
 
     /**
@@ -138,7 +137,7 @@ public class HypixelController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/games")
     public @NotNull ResourceGames getGames() {
-        return endpoint().getGames();
+        return contract().getGames();
     }
 
 }
