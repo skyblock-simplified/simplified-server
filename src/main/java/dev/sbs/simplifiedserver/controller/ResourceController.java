@@ -1,7 +1,7 @@
 package dev.sbs.simplifiedserver.controller;
 
 import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.request.HypixelContract;
+import dev.sbs.minecraftapi.client.hypixel.HypixelContract;
 import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceCollections;
 import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceElection;
 import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceItems;
