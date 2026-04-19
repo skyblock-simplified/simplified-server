@@ -1,13 +1,13 @@
 package dev.sbs.simplifiedserver.controller;
 
-import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.HypixelContract;
-import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelCounts;
-import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelGuildResponse;
-import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelPlayerResponse;
-import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelPunishmentStats;
-import dev.sbs.minecraftapi.client.hypixel.response.hypixel.HypixelStatus;
-import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceGames;
+import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.hypixelapi.HypixelContract;
+import dev.sbs.hypixelapi.response.hypixel.HypixelCounts;
+import dev.sbs.hypixelapi.response.hypixel.HypixelGuildResponse;
+import dev.sbs.hypixelapi.response.hypixel.HypixelPlayerResponse;
+import dev.sbs.hypixelapi.response.hypixel.HypixelPunishmentStats;
+import dev.sbs.hypixelapi.response.hypixel.HypixelStatus;
+import dev.sbs.hypixelapi.response.resource.ResourceGames;
 import dev.sbs.serverapi.security.ApiKeyProtected;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -36,7 +36,7 @@ import java.util.UUID;
 public class HypixelController {
 
     private @NotNull HypixelContract contract() {
-        return MinecraftApi.getClient(HypixelContract.class).getContract();
+        return ServerApi.getHypixelClient().getContract();
     }
 
     /**

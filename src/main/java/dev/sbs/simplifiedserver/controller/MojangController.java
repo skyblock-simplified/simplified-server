@@ -1,11 +1,11 @@
 package dev.sbs.simplifiedserver.controller;
 
-import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.mojang.MojangContract;
-import dev.sbs.minecraftapi.client.mojang.response.MojangMultiUsername;
-import dev.sbs.minecraftapi.client.mojang.response.MojangProfile;
-import dev.sbs.minecraftapi.client.mojang.response.MojangProperties;
-import dev.sbs.minecraftapi.client.mojang.response.MojangUsername;
+import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.mojangapi.MojangContract;
+import dev.sbs.mojangapi.response.MojangMultiUsername;
+import dev.sbs.mojangapi.response.MojangProfile;
+import dev.sbs.mojangapi.response.MojangProperties;
+import dev.sbs.mojangapi.response.MojangUsername;
 import dev.sbs.serverapi.security.ApiKeyProtected;
 import dev.simplified.client.Proxy;
 import dev.simplified.util.StringUtil;
@@ -39,7 +39,7 @@ import java.util.UUID;
 public class MojangController {
 
     private @NotNull MojangContract contract() {
-        return MinecraftApi.getMojangProxy().getContract();
+        return ServerApi.getMojangProxy().getContract();
     }
 
     /**

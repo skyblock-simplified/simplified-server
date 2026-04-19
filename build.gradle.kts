@@ -39,9 +39,19 @@ dependencies {
         exclude(group = "org.jboss.logging", module = "jboss-logging")
     }
 
+    // Simplified infrastructure (formerly transitive via minecraft-api)
+    implementation("com.github.simplified-dev:client:master-SNAPSHOT")
+    implementation("com.github.simplified-dev:gson-extras:master-SNAPSHOT")
+    implementation("com.github.simplified-dev:manager:master-SNAPSHOT")
+
+    // Split minecraft-api modules
+    implementation("com.github.skyblock-simplified:skyblock-data-api:master-SNAPSHOT")
+    implementation("com.github.skyblock-simplified:mojang-api:master-SNAPSHOT")
+    implementation("com.github.skyblock-simplified:sbs-api:master-SNAPSHOT")
+    implementation("com.github.skyblock-simplified:hypixel-api:master-SNAPSHOT")
+
     // Projects
     implementation("dev.sbs:server-api:0.1.0")
-    implementation("dev.sbs:minecraft-api:0.1.0")
 }
 
 tasks {

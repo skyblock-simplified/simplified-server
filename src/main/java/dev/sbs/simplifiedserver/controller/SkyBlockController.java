@@ -1,16 +1,16 @@
 package dev.sbs.simplifiedserver.controller;
 
-import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.HypixelContract;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockAuctionResponse;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockAuctions;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockAuctionsEnded;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockBazaar;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockFireSaleResponse;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockGardenResponse;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockMuseumResponse;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockNews;
-import dev.sbs.minecraftapi.client.hypixel.response.skyblock.SkyBlockProfiles;
+import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.hypixelapi.HypixelContract;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockAuctionResponse;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockAuctions;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockAuctionsEnded;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockBazaar;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockFireSaleResponse;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockGardenResponse;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockMuseumResponse;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockNews;
+import dev.sbs.hypixelapi.response.skyblock.SkyBlockProfiles;
 import dev.sbs.serverapi.security.ApiKeyProtected;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,7 +39,7 @@ import java.util.UUID;
 public class SkyBlockController {
 
     private @NotNull HypixelContract contract() {
-        return MinecraftApi.getClient(HypixelContract.class).getContract();
+        return ServerApi.getHypixelClient().getContract();
     }
 
     /**

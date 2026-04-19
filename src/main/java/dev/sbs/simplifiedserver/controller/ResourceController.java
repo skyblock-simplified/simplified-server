@@ -1,11 +1,11 @@
 package dev.sbs.simplifiedserver.controller;
 
-import dev.sbs.minecraftapi.MinecraftApi;
-import dev.sbs.minecraftapi.client.hypixel.HypixelContract;
-import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceCollections;
-import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceElection;
-import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceItems;
-import dev.sbs.minecraftapi.client.hypixel.response.resource.ResourceSkills;
+import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.hypixelapi.HypixelContract;
+import dev.sbs.hypixelapi.response.resource.ResourceCollections;
+import dev.sbs.hypixelapi.response.resource.ResourceElection;
+import dev.sbs.hypixelapi.response.resource.ResourceItems;
+import dev.sbs.hypixelapi.response.resource.ResourceSkills;
 import dev.sbs.serverapi.security.ApiKeyProtected;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResourceController {
 
     private @NotNull HypixelContract contract() {
-        return MinecraftApi.getClient(HypixelContract.class).getContract();
+        return ServerApi.getHypixelClient().getContract();
     }
 
     /**
