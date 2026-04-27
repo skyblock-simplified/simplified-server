@@ -6,11 +6,11 @@ import dev.sbs.hypixelapi.response.resource.ResourceCollections;
 import dev.sbs.hypixelapi.response.resource.ResourceElection;
 import dev.sbs.hypixelapi.response.resource.ResourceItems;
 import dev.sbs.hypixelapi.response.resource.ResourceSkills;
-import dev.sbs.serverapi.security.ApiKeyProtected;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,13 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * SkyBlock resource proxy endpoints under {@code /resources/}.
  *
- * <p>Provides publicly accessible SkyBlock resource definitions including skills,
- * collections, items, and election data. None of these endpoints require an API key.
- * Delegates to the {@link HypixelContract} Feign client for upstream calls.</p>
+ * <p>Provides SkyBlock resource definitions including skills, collections, items, and
+ * election data. Delegates to the {@link HypixelContract} Feign client for upstream calls.</p>
  */
-@Tag(name = "Resources", description = "SkyBlock resource endpoints (no API key required)")
+@Tag(name = "Resources", description = "SkyBlock resource endpoints")
 @RestController
-@ApiKeyProtected
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/resources")
 public class ResourceController {
 

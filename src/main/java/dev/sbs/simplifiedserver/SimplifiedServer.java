@@ -1,7 +1,6 @@
 package dev.sbs.simplifiedserver;
 
 import com.google.gson.Gson;
-import dev.sbs.minecraftapi.MinecraftApi;
 import dev.sbs.serverapi.config.ServerConfig;
 import dev.simplified.util.SystemUtil;
 import org.jetbrains.annotations.NotNull;
@@ -12,23 +11,23 @@ import org.springframework.context.annotation.Bean;
 /**
  * Spring Boot application entry point for the Simplified Server.
  *
- * <p>Provides a {@link Gson} bean via {@link MinecraftApi#getGson()} that the framework's
+ * <p>Provides a {@link Gson} bean via {@link ServerApi#getGson()} that the framework's
  * message converter configuration picks up automatically.
  *
  * <p>Server tuning is driven by {@link ServerConfig}, which supplies all default properties
- * programmatically.</p>
+ * programmatically.
  */
 @SpringBootApplication(scanBasePackages = { "dev.sbs.simplifiedserver", "dev.sbs.serverapi" })
 public class SimplifiedServer {
 
     @Bean
     public @NotNull Gson gson() {
-        return MinecraftApi.getGson();
+        return ServerApi.getGson();
     }
 
     public static void main(String[] args) {
-        MinecraftApi.getKeyManager().add(SystemUtil.getEnvPair("HYPIXEL_API_KEY"));
-        SystemUtil.getEnv("INET6_NETWORK_PREFIX").ifPresent(MinecraftApi.getMojangProxy()::setInet6NetworkPrefix);
+        ServerApi.getKeyManager().add(SystemUtil.getEnvPair("HYPIXEL_API_KEY"));
+        SystemUtil.getEnv("INET6_NETWORK_PREFIX").ifPresent(ServerApi::setInet6NetworkPrefix);
         SpringApplication application = new SpringApplication(SimplifiedServer.class);
         application.setDefaultProperties(
             ServerConfig.optimized()

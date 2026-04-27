@@ -130,3 +130,6 @@ gradle-app.setting
 .env
 
 .claude/
+
+# Local-only API key store (contains hardcoded development keys)
+src/main/java/dev/sbs/simplifiedserver/config/LocalApiKeyStoreConfig.java

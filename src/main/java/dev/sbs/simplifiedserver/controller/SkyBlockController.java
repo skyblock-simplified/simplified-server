@@ -11,12 +11,12 @@ import dev.sbs.hypixelapi.response.skyblock.SkyBlockGardenResponse;
 import dev.sbs.hypixelapi.response.skyblock.SkyBlockMuseumResponse;
 import dev.sbs.hypixelapi.response.skyblock.SkyBlockNews;
 import dev.sbs.hypixelapi.response.skyblock.SkyBlockProfiles;
-import dev.sbs.serverapi.security.ApiKeyProtected;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +34,7 @@ import java.util.UUID;
  */
 @Tag(name = "SkyBlock", description = "SkyBlock API proxy endpoints")
 @RestController
-@ApiKeyProtected
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/skyblock")
 public class SkyBlockController {
 
