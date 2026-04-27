@@ -1,6 +1,7 @@
 package dev.sbs.simplifiedserver.controller;
 
 import api.simplified.hypixel.HypixelContract;
+import api.simplified.hypixel.SkyBlockContract;
 import api.simplified.hypixel.response.resource.ResourceCollections;
 import api.simplified.hypixel.response.resource.ResourceElection;
 import api.simplified.hypixel.response.resource.ResourceItems;
@@ -28,8 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/resources")
 public class ResourceController {
 
-    private @NotNull HypixelContract contract() {
-        return ServerApi.getHypixelClient().getContract();
+    private @NotNull SkyBlockContract contract() {
+        return ServerApi.getSkyBlockClient().getContract();
     }
 
     /**

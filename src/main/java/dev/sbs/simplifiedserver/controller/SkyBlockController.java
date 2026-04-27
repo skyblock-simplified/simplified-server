@@ -1,6 +1,7 @@
 package dev.sbs.simplifiedserver.controller;
 
 import api.simplified.hypixel.HypixelContract;
+import api.simplified.hypixel.SkyBlockContract;
 import api.simplified.hypixel.response.skyblock.SkyBlockAuctionResponse;
 import api.simplified.hypixel.response.skyblock.SkyBlockAuctions;
 import api.simplified.hypixel.response.skyblock.SkyBlockAuctionsEnded;
@@ -38,8 +39,8 @@ import java.util.UUID;
 @RequestMapping("/skyblock")
 public class SkyBlockController {
 
-    private @NotNull HypixelContract contract() {
-        return ServerApi.getHypixelClient().getContract();
+    private @NotNull SkyBlockContract contract() {
+        return ServerApi.getSkyBlockClient().getContract();
     }
 
     /**
