@@ -2,10 +2,10 @@ package dev.sbs.simplifiedserver;
 
 import api.simplified.hypixel.HypixelContract;
 import api.simplified.hypixel.exception.HypixelApiException;
+import api.simplified.mojang.MojangContract;
+import api.simplified.mojang.exception.MojangApiException;
+import api.simplified.mojang.request.MojangDomain;
 import com.google.gson.Gson;
-import dev.sbs.mojangapi.MojangContract;
-import dev.sbs.mojangapi.exception.MojangApiException;
-import dev.sbs.mojangapi.request.MojangDomain;
 import dev.sbs.sbsapi.SbsContract;
 import dev.sbs.sbsapi.exception.SbsApiException;
 import dev.simplified.client.Client;

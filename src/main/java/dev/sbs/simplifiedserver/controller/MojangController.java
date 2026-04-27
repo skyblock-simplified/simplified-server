@@ -1,11 +1,11 @@
 package dev.sbs.simplifiedserver.controller;
 
+import api.simplified.mojang.MojangContract;
+import api.simplified.mojang.response.MojangMultiUsername;
+import api.simplified.mojang.response.MojangProfile;
+import api.simplified.mojang.response.MojangProperties;
+import api.simplified.mojang.response.MojangUsername;
 import dev.sbs.simplifiedserver.ServerApi;
-import dev.sbs.mojangapi.MojangContract;
-import dev.sbs.mojangapi.response.MojangMultiUsername;
-import dev.sbs.mojangapi.response.MojangProfile;
-import dev.sbs.mojangapi.response.MojangProperties;
-import dev.sbs.mojangapi.response.MojangUsername;
 import dev.simplified.client.Proxy;
 import dev.simplified.util.StringUtil;
 import io.swagger.v3.oas.annotations.Operation;
