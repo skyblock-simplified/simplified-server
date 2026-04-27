@@ -1,7 +1,6 @@
 package dev.sbs.simplifiedserver;
 
 import api.simplified.hypixel.HypixelContract;
-import api.simplified.hypixel.SkyBlockContract;
 import api.simplified.hypixel.exception.HypixelApiException;
 import api.simplified.mojang.MojangContract;
 import api.simplified.mojang.exception.MojangApiException;
@@ -44,13 +43,6 @@ public final class ServerApi {
 
     @Getter private static final @NotNull Client<HypixelContract> hypixelClient = Client.create(
         ClientConfig.builder(HypixelContract.class, gson)
-            .withErrorDecoder(HypixelApiException::new)
-            .withDynamicHeader("API-Key", keyManager.getSupplier("HYPIXEL_API_KEY"))
-            .build()
-    );
-
-    @Getter private static final @NotNull Client<SkyBlockContract> skyBlockClient = Client.create(
-        ClientConfig.builder(SkyBlockContract.class, gson)
             .withErrorDecoder(HypixelApiException::new)
             .withDynamicHeader("API-Key", keyManager.getSupplier("HYPIXEL_API_KEY"))
             .build()
