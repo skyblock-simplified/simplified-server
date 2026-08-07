@@ -45,10 +45,10 @@ dependencies {
     implementation("com.github.simplified-dev:manager:master-SNAPSHOT")
 
     // Split minecraft-api modules
-    implementation("com.github.simplified-api:skyblock:master-SNAPSHOT")
-    implementation("com.github.simplified-api:mojang:master-SNAPSHOT")
-    implementation("com.github.skyblock-simplified:simplified-api:master-SNAPSHOT")
-    implementation("com.github.simplified-api:hypixel:master-SNAPSHOT")
+    implementation("com.github.api:skyblock:master-SNAPSHOT")
+    implementation("com.github.api:mojang:master-SNAPSHOT")
+    implementation("com.github.skyblock-simplified:api:master-SNAPSHOT")
+    implementation("com.github.api:hypixel:master-SNAPSHOT")
 
     // Projects
     implementation("com.github.simplified-dev:spring-framework:master-SNAPSHOT")
@@ -70,7 +70,7 @@ tasks {
         append("META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports")
 
         manifest {
-            attributes["Main-Class"] = "dev.sbs.simplifiedserver.SimplifiedServer"
+            attributes["Main-Class"] = "dev.sbs.server.SimplifiedServer"
             attributes["Multi-Release"] = "true"
         }
 

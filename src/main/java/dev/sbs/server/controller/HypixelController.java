@@ -1,4 +1,4 @@
-package dev.sbs.simplifiedserver.controller;
+package dev.sbs.server.controller;
 
 import api.simplified.hypixel.HypixelContract;
 import api.simplified.hypixel.response.hypixel.HypixelCounts;
@@ -7,7 +7,7 @@ import api.simplified.hypixel.response.hypixel.HypixelPlayerResponse;
 import api.simplified.hypixel.response.hypixel.HypixelPunishmentStats;
 import api.simplified.hypixel.response.hypixel.HypixelStatus;
 import api.simplified.hypixel.response.resource.ResourceGames;
-import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.server.ServerApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

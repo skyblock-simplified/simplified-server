@@ -1,11 +1,11 @@
-package dev.sbs.simplifiedserver.controller;
+package dev.sbs.server.controller;
 
 import api.simplified.hypixel.HypixelContract;
 import api.simplified.hypixel.response.resource.ResourceCollections;
 import api.simplified.hypixel.response.resource.ResourceElection;
 import api.simplified.hypixel.response.resource.ResourceItems;
 import api.simplified.hypixel.response.resource.ResourceSkills;
-import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.server.ServerApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jetbrains.annotations.NotNull;

@@ -41,12 +41,12 @@ For running the server locally:
 
 1. **Fork and clone the repository**
 
-   [Fork the repository](https://github.com/SkyBlock-Simplified/simplified-server/fork),
+   [Fork the repository](https://github.com/SkyBlock-Simplified/server/fork),
    then clone your fork:
 
    ```bash
-   git clone https://github.com/<your-username>/simplified-server.git
-   cd simplified-server
+   git clone https://github.com/<your-username>/server.git
+   cd server
    ```
 
 2. **Clone dependency modules alongside** (for local development)
@@ -67,7 +67,7 @@ For running the server locally:
    The Gradle wrapper is included - no separate Gradle installation is needed.
 
    ```bash
-   cd simplified-server
+   cd server
    ./gradlew build
    ```
 
@@ -175,7 +175,7 @@ Tests use JUnit 5 (Jupiter):
    ```
 
 2. **Open a Pull Request** against the `master` branch of
-   [SkyBlock-Simplified/simplified-server](https://github.com/SkyBlock-Simplified/simplified-server).
+   [SkyBlock-Simplified/server](https://github.com/SkyBlock-Simplified/server).
 
 3. **In the PR description**, include:
    - A summary of the changes and the motivation behind them.
@@ -198,7 +198,7 @@ Tests use JUnit 5 (Jupiter):
 
 ## Reporting Issues
 
-Use [GitHub Issues](https://github.com/SkyBlock-Simplified/simplified-server/issues)
+Use [GitHub Issues](https://github.com/SkyBlock-Simplified/server/issues)
 to report bugs or request features.
 
 When reporting a bug, include:

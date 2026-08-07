@@ -1,4 +1,4 @@
-package dev.sbs.simplifiedserver.controller;
+package dev.sbs.server.controller;
 
 import api.simplified.hypixel.HypixelContract;
 import api.simplified.hypixel.response.skyblock.SkyBlockAuctionResponse;
@@ -10,7 +10,7 @@ import api.simplified.hypixel.response.skyblock.SkyBlockGardenResponse;
 import api.simplified.hypixel.response.skyblock.SkyBlockMuseumResponse;
 import api.simplified.hypixel.response.skyblock.SkyBlockNews;
 import api.simplified.hypixel.response.skyblock.SkyBlockProfiles;
-import dev.sbs.simplifiedserver.ServerApi;
+import dev.sbs.server.ServerApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

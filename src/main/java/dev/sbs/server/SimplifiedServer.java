@@ -1,4 +1,4 @@
-package dev.sbs.simplifiedserver;
+package dev.sbs.server;
 
 import com.google.gson.Gson;
 import dev.simplified.serverapi.config.ServerConfig;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean;
  * <p>Server tuning is driven by {@link ServerConfig}, which supplies all default properties
  * programmatically.
  */
-@SpringBootApplication(scanBasePackages = { "dev.sbs.simplifiedserver", "dev.sbs.serverapi" })
+@SpringBootApplication(scanBasePackages = { "dev.sbs.server", "dev.sbs.serverapi" })
 public class SimplifiedServer {
 
     @Bean

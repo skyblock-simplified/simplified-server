@@ -9,22 +9,22 @@ See [`server-api/CLAUDE.md`](../server-api/CLAUDE.md) for the reusable Spring se
 
 ```bash
 # From repo root
-./gradlew :simplified-server:build          # Build (includes shadowJar)
-./gradlew :simplified-server:test           # Run all tests
+./gradlew :server:build          # Build (includes shadowJar)
+./gradlew :server:test           # Run all tests
 
 # Fat JAR (shadowJar merged into build task)
-./gradlew :simplified-server:shadowJar      # Output: build/libs/simplified-server-0.1.0.jar
+./gradlew :server:shadowJar      # Output: build/libs/server-0.1.0.jar
 ```
 
 ## Module Overview
 
-`simplified-server` is the SkyBlock-specific Spring Boot REST server. It depends on `server-api` (framework) and `minecraft-api` via Maven coordinates. The `server-api` framework provides API versioning, API key authentication, error handling, and server configuration; this module provides the concrete controllers, OpenAPI metadata, and application entry point.
+`server` is the SkyBlock-specific Spring Boot REST server. It depends on `server-api` (framework) and `minecraft-api` via Maven coordinates. The `server-api` framework provides API versioning, API key authentication, error handling, and server configuration; this module provides the concrete controllers, OpenAPI metadata, and application entry point.
 
-Follows the same split pattern as `discord-api` (framework) vs `simplified-bot` (implementation).
+Follows the same split pattern as `discord-api` (framework) vs `bot` (implementation).
 
 ### Entry Point
 
-- **`SimplifiedServer`** - Spring Boot application. Provides a `Gson` bean via `MinecraftApi.getGson()` that `ServerWebConfig` (from `server-api`) picks up automatically for the `GsonHttpMessageConverter`. Jackson auto-configuration remains enabled for SpringDoc's internal OpenAPI spec generation. Uses `ServerConfig.optimized()` to supply all default properties programmatically. Scans both `dev.sbs.simplifiedserver` and `dev.sbs.serverapi` packages via `@SpringBootApplication(scanBasePackages = ...)`.
+- **`SimplifiedServer`** - Spring Boot application. Provides a `Gson` bean via `MinecraftApi.getGson()` that `ServerWebConfig` (from `server-api`) picks up automatically for the `GsonHttpMessageConverter`. Jackson auto-configuration remains enabled for SpringDoc's internal OpenAPI spec generation. Uses `ServerConfig.optimized()` to supply all default properties programmatically. Scans both `dev.sbs.server` and `dev.sbs.serverapi` packages via `@SpringBootApplication(scanBasePackages = ...)`.
 
 ### Package Structure
 

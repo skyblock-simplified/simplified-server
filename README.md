@@ -73,8 +73,8 @@ side by side and use Gradle composite builds:
 git clone https://github.com/SkyBlock-Simplified/api.git
 git clone https://github.com/SkyBlock-Simplified/minecraft-api.git
 git clone https://github.com/SkyBlock-Simplified/server-api.git
-git clone https://github.com/SkyBlock-Simplified/simplified-server.git
-cd simplified-server
+git clone https://github.com/SkyBlock-Simplified/server.git
+cd server
 ```
 
 Build the server:
@@ -92,7 +92,7 @@ Run tests:
 Run the server:
 
 ```bash
-java -jar build/libs/simplified-server-0.1.0.jar
+java -jar build/libs/server-0.1.0.jar
 ```
 
 <details>
@@ -106,7 +106,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.SkyBlock-Simplified:simplified-server:master-SNAPSHOT")
+    implementation("com.github.SkyBlock-Simplified:server:master-SNAPSHOT")
 }
 ```
 
@@ -114,11 +114,11 @@ dependencies {
 
 ```kotlin
 // settings.gradle.kts
-includeBuild("../simplified-server")
+includeBuild("../server")
 
 // build.gradle.kts
 dependencies {
-    implementation("dev.sbs:simplified-server:0.1.0")
+    implementation("dev.sbs:server:0.1.0")
 }
 ```
 
@@ -197,7 +197,7 @@ driven by `ServerConfig.optimized()`, which supplies all default properties
 programmatically.
 
 ```java
-@SpringBootApplication(scanBasePackages = { "dev.sbs.simplifiedserver", "dev.sbs.serverapi" })
+@SpringBootApplication(scanBasePackages = { "dev.sbs.server", "dev.sbs.serverapi" })
 public class SimplifiedServer {
 
     @Bean
@@ -241,7 +241,7 @@ All controllers delegate to upstream Feign clients from `minecraft-api`:
 ## Project Structure
 
 ```
-simplified-server/
+server/
 ├── src/main/java/dev/sbs/simplifiedserver/
 │   ├── SimplifiedServer.java          # Spring Boot entry point with Gson bean
 │   ├── config/
