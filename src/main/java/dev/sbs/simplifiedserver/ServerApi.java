@@ -6,8 +6,8 @@ import api.simplified.mojang.MojangContract;
 import api.simplified.mojang.exception.MojangApiException;
 import api.simplified.mojang.request.MojangDomain;
 import com.google.gson.Gson;
-import dev.sbs.sbsapi.SbsContract;
-import dev.sbs.sbsapi.exception.SbsApiException;
+import dev.sbs.simplifiedapi.SimplifiedContract;
+import dev.sbs.simplifiedapi.exception.SimplifiedApiException;
 import dev.simplified.client.Client;
 import dev.simplified.client.ClientConfig;
 import dev.simplified.client.Proxy;
@@ -48,9 +48,9 @@ public final class ServerApi {
             .build()
     );
 
-    @Getter private static final @NotNull Client<SbsContract> sbsClient = Client.create(
-        ClientConfig.builder(SbsContract.class, gson)
-            .withErrorDecoder(SbsApiException::new)
+    @Getter private static final @NotNull Client<SimplifiedContract> sbsClient = Client.create(
+        ClientConfig.builder(SimplifiedContract.class, gson)
+            .withErrorDecoder(SimplifiedApiException::new)
             .build()
     );
 
