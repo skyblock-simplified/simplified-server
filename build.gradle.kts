@@ -40,8 +40,8 @@ dependencies {
     }
 
     // Simplified infrastructure (formerly transitive via minecraft-api)
-    implementation("com.github.simplified-dev:client:master-SNAPSHOT")
-    implementation("com.github.simplified-dev:gson-extras:master-SNAPSHOT")
+    implementation("com.github.simplified-dev:client") { version { strictly("3d87a03") } }
+    implementation("com.github.simplified-dev:gson-extras") { version { strictly("2ba8143") } }
     implementation("com.github.simplified-dev:manager:master-SNAPSHOT")
 
     // Split minecraft-api modules
