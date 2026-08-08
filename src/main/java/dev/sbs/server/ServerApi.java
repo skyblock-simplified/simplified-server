@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  * / {@link Proxy} instances for the Hypixel, SBS, and Mojang contracts. The Mojang
  * {@link Proxy} can be rebuilt with IPv6 source-address rotation via
  * {@link #setInet6NetworkPrefix(String)} once the runtime prefix is known. Persistence access
- * flows through {@code dev.sbs.skyblockdata.SkyBlockData} directly - this locator does not
+ * flows through {@code api.simplified.skyblock.SkyBlockData} directly - this locator does not
  * own it.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
