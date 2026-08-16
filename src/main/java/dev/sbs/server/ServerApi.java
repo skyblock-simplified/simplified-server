@@ -8,16 +8,18 @@ import api.simplified.mojang.request.MojangDomain;
 import com.google.gson.Gson;
 import dev.sbs.api.SimplifiedContract;
 import dev.sbs.api.exception.SimplifiedApiException;
+import dev.simplified.annotations.AccessLevel;
+import dev.simplified.annotations.Getter;
+import dev.simplified.annotations.NoArgsConstructor;
 import dev.simplified.client.Client;
 import dev.simplified.client.ClientConfig;
 import dev.simplified.client.Proxy;
+import dev.simplified.client.subnet.SubnetRotation;
 import dev.simplified.gson.GsonSettings;
 import dev.simplified.manager.KeyManager;
 import dev.simplified.manager.Manager;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Server-local service locator that replaces the former {@code MinecraftApi} static holder.
@@ -42,34 +44,41 @@ public final class ServerApi {
     );
 
     @Getter private static final @NotNull Client<HypixelContract> hypixelClient = Client.create(
-        ClientConfig.builder(HypixelContract.class, gson)
+        ClientConfig.builder(HypixelContract.class, gsonSettings)
             .withErrorDecoder(HypixelApiException::new)
             .withDynamicHeader("API-Key", keyManager.getSupplier("HYPIXEL_API_KEY"))
             .build()
     );
 
     @Getter private static final @NotNull Client<SimplifiedContract> sbsClient = Client.create(
-        ClientConfig.builder(SimplifiedContract.class, gson)
+        ClientConfig.builder(SimplifiedContract.class, gsonSettings)
             .withErrorDecoder(SimplifiedApiException::new)
             .build()
     );
 
-    private static volatile @NotNull Proxy<MojangContract> mojangProxy = Proxy.builder(
-            ClientConfig.builder(MojangContract.class, gson)
-                .withErrorDecoder(MojangApiException::new)
-                .build()
-        )
-        .withAvailability(client -> !client.isRateLimited(MojangDomain.MINECRAFT_SERVICES))
-        .build();
+    /**
+     * The rate-limit-relevant subnet size for the Mojang rotation. A {@code /64} is the
+     * smallest block an IPv6 host is normally delegated, and the granularity an edge treats
+     * as one client, so budgets are tracked per {@code /64} rather than per address.
+     */
+    private static final int MOJANG_BUCKET_PREFIX_LENGTH = 64;
+
+    private static volatile @Nullable Proxy<MojangContract> mojangProxy = null;
 
     /**
-     * Returns the shared Mojang proxy, rebuilt with IPv6 rotation if
-     * {@link #setInet6NetworkPrefix(String)} has been called.
+     * Returns the shared Mojang proxy, which rotates outbound source addresses across the
+     * prefix supplied to {@link #setInet6NetworkPrefix(String)}.
      *
      * @return the shared Mojang proxy instance
+     * @throws IllegalStateException if no IPv6 prefix has been registered
      */
     public static @NotNull Proxy<MojangContract> getMojangProxy() {
-        return mojangProxy;
+        Proxy<MojangContract> proxy = mojangProxy;
+
+        if (proxy == null)
+            throw new IllegalStateException("setInet6NetworkPrefix must be called before the Mojang proxy is used");
+
+        return proxy;
     }
 
     /**
@@ -82,11 +91,16 @@ public final class ServerApi {
      */
     public static void setInet6NetworkPrefix(@NotNull String cidrPrefix) {
         mojangProxy = Proxy.builder(
-                ClientConfig.builder(MojangContract.class, gson)
+                ClientConfig.builder(MojangContract.class, gsonSettings)
                     .withErrorDecoder(MojangApiException::new)
                     .build()
             )
-            .withInet6Rotation(cidrPrefix)
+            .withSubnetRotation(
+                SubnetRotation.builder()
+                    .sourcePrefix(cidrPrefix)
+                    .bucketPrefixLength(MOJANG_BUCKET_PREFIX_LENGTH)
+                    .build()
+            )
             .withAvailability(client -> !client.isRateLimited(MojangDomain.MINECRAFT_SERVICES))
             .build();
     }
