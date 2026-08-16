@@ -44,7 +44,7 @@ dependencies {
     implementation("com.github.simplified-dev:manager") { version { strictly("7063ecd") } }
 
     // Split minecraft-api modules
-    implementation("com.github.simplified-api:skyblock") { version { strictly("2c6ddc6") } }
+    implementation("com.github.simplified-api:skyblock") { version { strictly("f0be258") } }
     implementation("com.github.simplified-api:mojang") { version { strictly("d678198") } }
     implementation("com.github.skyblock-simplified:api") { version { strictly("488d255") } }
     implementation("com.github.simplified-api:hypixel") { version { strictly("a0f1f76") } }
