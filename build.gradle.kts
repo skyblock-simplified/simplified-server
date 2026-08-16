@@ -20,13 +20,12 @@ repositories {
 
 dependencies {
     // Simplified Annotations
+    compileOnly(libs.simplified.annotations)
     annotationProcessor(libs.simplified.annotations)
+    testCompileOnly(libs.simplified.annotations)
+    testAnnotationProcessor(libs.simplified.annotations)
 
     // Lombok Annotations
-    compileOnly(libs.lombok)
-    annotationProcessor(libs.lombok)
-    testCompileOnly(libs.lombok)
-    testAnnotationProcessor(libs.lombok)
 
     // Tests
     testImplementation(libs.hamcrest)
@@ -40,18 +39,18 @@ dependencies {
     }
 
     // Simplified infrastructure (formerly transitive via minecraft-api)
-    implementation("com.github.simplified-dev:client") { version { strictly("3d87a03") } }
-    implementation("com.github.simplified-dev:gson-extras") { version { strictly("2ba8143") } }
-    implementation("com.github.simplified-dev:manager:master-SNAPSHOT")
+    implementation("com.github.simplified-dev:client") { version { strictly("1ca9934") } }
+    implementation("com.github.simplified-dev:gson-extras") { version { strictly("f143dc1") } }
+    implementation("com.github.simplified-dev:manager") { version { strictly("7063ecd") } }
 
     // Split minecraft-api modules
-    implementation("com.github.simplified-api:skyblock:master-SNAPSHOT")
-    implementation("com.github.simplified-api:mojang:master-SNAPSHOT")
-    implementation("com.github.skyblock-simplified:api:master-SNAPSHOT")
-    implementation("com.github.simplified-api:hypixel:master-SNAPSHOT")
+    implementation("com.github.simplified-api:skyblock") { version { strictly("2c6ddc6") } }
+    implementation("com.github.simplified-api:mojang") { version { strictly("d678198") } }
+    implementation("com.github.skyblock-simplified:api") { version { strictly("488d255") } }
+    implementation("com.github.simplified-api:hypixel") { version { strictly("a0f1f76") } }
 
     // Projects
-    implementation("com.github.simplified-dev:spring-framework:master-SNAPSHOT")
+    implementation("com.github.simplified-dev:spring-framework") { version { strictly("ac95902") } }
 }
 
 tasks {
